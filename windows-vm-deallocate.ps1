@@ -1,3 +1,0 @@
-$ArmToken = ((Invoke-WebRequest -Uri 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https://management.azure.com/' -Method GET -Headers @{Metadata="true"}).Content | ConvertFrom-Json).access_token
-$vm=Invoke-RestMethod -Headers @{"Metadata"="true"} -URI "http://169.254.169.254/metadata/instance/compute?api-version=2017-08-01&format=json" -Method get
-Invoke-WebRequest -Uri https://management.azure.com/subscriptions/$($vm.subscriptionId)/resourceGroups/$($vm.resourceGroupName)/providers/Microsoft.Compute/virtualMachines/$($vm.name)/deallocate?api-version=2019-12-01 -Method POST -ContentType "application/json" -Headers @{ Authorization ="Bearer $ArmToken"}
